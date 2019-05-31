@@ -1,6 +1,20 @@
-// App Styles
-// ----------------------------------------------------------------------------
-// Put style rules here that you want to apply to the entire application. These 
-// styles are for the entire app and not just one component. Additionally, this 
-// file can hold Sass mixins, functions, and placeholder classes to be imported 
-// and used throughout the application.
+.asignaturas-modal {
+  .modal-wrapper {
+    width: 60%;
+    height: 460px;
+  }
+
+  ion-button{
+    width: 120px;
+  }
+}
+
+.editar-asignatura {
+  .alert-wrapper {
+    min-width: 320px;
+  }
+  .alert-button-group {
+    display: flex;
+    flex-direction: row;
+  }
+}

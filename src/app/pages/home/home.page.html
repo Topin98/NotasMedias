@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Notas medias
+    </ion-title>
+    <ion-button (click)="goInsertarAlumnos()">
+      Añadir alumnos
+    </ion-button>
+    <ion-button (click)="goInsertarAsignaturas()">
+      Añadir asignaturas
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="filtros">
+    <input [(ngModel)]="alumnosService.filtroNombre" (keyup)="alumnosService.filtrarAlumnos(alumnosService.lAlumnos)"
+      placeholder="Filtrar por nombre..." type="text" />
+    <ion-list lines="none">
+      <ion-radio-group [(ngModel)]="alumnosService.filtroCurso" name="curso">
+        <div class="cursos">
+          <ion-item>
+            <ion-label>Todos</ion-label>
+            <ion-radio slot="start" value="" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>1º</ion-label>
+            <ion-radio slot="start" value="Primero" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>2º</ion-label>
+            <ion-radio slot="start" value="Segundo"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>3º</ion-label>
+            <ion-radio slot="start" value="Tercero"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>4º</ion-label>
+            <ion-radio slot="start" value="Cuarto"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+
+  <app-tabla-alumnos *ngFor="let nombreLista of alumnosService.lNombresListas" [lista]="nombreLista"
+    [titulo]="nombreLista.substring(1)"></app-tabla-alumnos>
+
+</ion-content>

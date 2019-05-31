@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cerrar()" color="danger" fill="outline">
+        Cerrar
+        <ion-icon slot="end" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Insertar alumnos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <form (ngSubmit)="traducir()">
+    <textarea [(ngModel)]="texto" name="texto" rows="10" cols="55"></textarea>
+
+    <ion-list lines="none">
+      <ion-radio-group [(ngModel)]="curso" name="curso">
+        <ion-list-header>
+          <ion-label class="titulo">Curso</ion-label>
+        </ion-list-header>
+        <div class="cursos">
+          <ion-item>
+            <ion-label>1º</ion-label>
+            <ion-radio slot="start" value="lPrimero" checked></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>2º</ion-label>
+            <ion-radio slot="start" value="lSegundo"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>3º</ion-label>
+            <ion-radio slot="start" value="lTercero"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>4º</ion-label>
+            <ion-radio slot="start" value="lCuarto"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+
+    <button class="btn btn-primary btnTraducir" [disabled]="texto.length == 0">Traducir</button>
+  </form>
+
+</ion-content>

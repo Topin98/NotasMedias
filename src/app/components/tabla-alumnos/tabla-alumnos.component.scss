@@ -1,0 +1,37 @@
+.tabla-alumos{
+  margin: 50px;
+  margin-top: 20px;
+}
+
+.titulo{
+    font-size: 25px;
+    margin-bottom: 7px;
+}
+
+.table {
+  text-align: center;
+
+  td {
+    padding: 0;
+  }
+
+  td:first-child {
+    width: 300px;
+  }
+
+  input {
+    border: none;
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+  }
+
+  input:hover {
+    background-color: #efefef;
+    cursor: pointer;
+  }
+
+  .calculos{
+      line-height: 36px;
+  }
+}

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="cerrar()" color="danger" fill="outline">
+        Cerrar
+        <ion-icon slot="end" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Asignaturas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="container">
+    <div *ngFor="let lAsignaturas of asignaturasService.lLAsignaturas; let i = index">
+      <ion-button (click)="nuevaAsignaturaAlert(i + 1)">Añadir {{i + 1}}º</ion-button>
+      <table class="table table-bordered">
+        <tr>
+          <td *ngFor="let asignatura of lAsignaturas" (click)="editarAsignaturaAlert(asignatura)" class="asignatura">
+            {{ asignatura.nombre }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</ion-content>
