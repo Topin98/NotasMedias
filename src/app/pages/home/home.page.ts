@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AlumnosService } from 'src/app/services/alumnos.service';
 import { MessagesService } from 'src/app/services/messages.service';
 import { ModalController } from '@ionic/angular';
@@ -7,20 +7,31 @@ import { AsignaturasPage } from '../asignaturas/asignaturas.page';
 import { AsignaturasService } from 'src/app/services/asignaturas.service';
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver';
+import { AuthenticationService } from 'src/app/services/authentication.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   constructor(
     public alumnosService: AlumnosService,
     public messagesService: MessagesService,
     public modalController: ModalController,
-    public asignaturasService: AsignaturasService) {
+    public asignaturasService: AsignaturasService,
+    public authService: AuthenticationService) {
+  }
 
+  ngOnInit() {
+    this.alumnosService.getAlumnos().subscribe(alumnos => {
+      //console.log("alumnos", alumnos);
+    });
+
+    this.asignaturasService.getAsignaturas().subscribe(asignaturas => {
+      //console.log("asignaturas", asignaturas);
+    });
   }
 
   async goInsertarAlumnos() {
@@ -106,6 +117,10 @@ export class HomePage {
     var view = new Uint8Array(buf);
     for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
     return buf;
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }

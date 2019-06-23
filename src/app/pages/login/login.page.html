@@ -1,0 +1,20 @@
+<ion-content>
+
+  <div class="main-container">
+    <div class="form">
+      <div class="titulo">Emilio Alarcos</div>
+      <form #form="ngForm" (ngSubmit)="login()">
+        <ion-item class="item-form">
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input [(ngModel)]="username" name="username" email required autocomplete="off"></ion-input>
+        </ion-item>
+        <ion-item class="item-form">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="password" name="password" required autocomplete="off"></ion-input>
+        </ion-item>
+        <button [disabled]="form.invalid" type="submit" class="button-login btn btn-primary">Iniciar sesión</button>
+    </form>
+  </div>
+  </div>
+
+</ion-content>

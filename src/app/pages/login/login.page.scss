@@ -1,0 +1,48 @@
+.main-container {
+  background-image: url("../../../assets/fondo.jpg");
+  width: 100vw;
+  height: 100vh;
+
+  .form {
+    width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #91b8ff;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 15px;
+
+    .titulo {
+      height: 110px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      color: black;
+    }
+
+    .item-form {
+      margin-top: 5px;
+
+      ion-label {
+        color: gray;
+      }
+    }
+
+    .button-login {
+      width: 100%;
+      margin-top: 20px;
+      height: 40px;
+      border-radius: 20px;
+      border: none;
+      font-size: 19px;
+    }
+
+    .button-login:disabled {
+      background-color: #65a1e0;
+    }
+  }
+}

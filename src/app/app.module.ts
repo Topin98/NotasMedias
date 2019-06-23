@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { NuevosAlumnosPageModule } from './pages/nuevos-alumnos/nuevos-alumnos.module';
 import { AsignaturasPageModule } from './pages/asignaturas/asignaturas.module';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +29,8 @@ import { AsignaturasPageModule } from './pages/asignaturas/asignaturas.module';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFireAuth
   ],
   bootstrap: [AppComponent]
 })
