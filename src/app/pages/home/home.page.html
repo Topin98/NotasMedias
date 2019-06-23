@@ -3,12 +3,6 @@
     <ion-title>
       Notas medias
     </ion-title>
-    <ion-button (click)="goInsertarAlumnos()">
-      Añadir alumnos
-    </ion-button>
-    <ion-button (click)="goInsertarAsignaturas()">
-      Añadir asignaturas
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -43,6 +37,17 @@
         </div>
       </ion-radio-group>
     </ion-list>
+    <div class="btnsContainer">
+      <ion-button (click)="goInsertarAlumnos()">
+        Añadir alumnos
+      </ion-button>
+      <ion-button (click)="goInsertarAsignaturas()">
+        Añadir asignaturas
+      </ion-button>
+      <ion-button (click)="generarExcel()">
+        Generar Excel
+      </ion-button>
+    </div>
   </div>
 
   <app-tabla-alumnos *ngFor="let nombreLista of alumnosService.lNombresListas" [lista]="nombreLista"

@@ -39,11 +39,11 @@ export class TablaAlumnosComponent {
   }
 
   getSuma(alumno: Alumno){
-    return this.alumnosService.getSuma(alumno, this.lista);
+    return this.alumnosService.getSuma(alumno);
   }
 
   getMedia(alumno: Alumno){
-    return this.alumnosService.getMedia(alumno, this.lista);
+    return this.alumnosService.getMedia(alumno);
   }
 
 }

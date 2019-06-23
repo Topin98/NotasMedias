@@ -6,7 +6,6 @@
     align-items: center;
 }
 
-
 input{
     height: 35px;
     padding-left: 10px;
@@ -14,4 +13,13 @@ input{
 
 .cursos{
     display: flex;
+}
+
+.btnsContainer{
+    margin-right: 0;
+    margin-left: auto;
+
+    ion-button{
+        margin: 15px;
+    }
 }

@@ -63,23 +63,37 @@ export class AlumnosService {
     this.alumnosCollection.doc(alumno.id).delete();
   }
 
-  getSuma(alumno: Alumno, lista: string) {
-    return alumno[lista] ? alumno[lista].reduce((sumar, a) => sumar + Number(a), 0) : null;
+  getSuma(alumno: Alumno) {
+    let sum = 0;
+    this.lNombresListas.forEach(key => {
+      sum += alumno[key] ? alumno[key].reduce((sumar, a) => sumar + Number(a), 0) : 0;
+    });
+
+    return sum;
   }
 
-  getMedia(alumno: Alumno, lista: string) {
+  getMedia(alumno: Alumno) {
 
-    let suma = this.getSuma(alumno, lista);
+    let suma = this.getSuma(alumno);
 
     if (suma) {
-      return suma / alumno[lista].filter(x => x).length;
+      return suma / this.getNumNotas(alumno);
     } else {
       return null;
     }
   }
 
-  filtrarAlumnos(lista: Alumno[]){
-    
+  getNumNotas(alumno: Alumno) {
+    let sum = 0;
+    this.lNombresListas.forEach(key => {
+      sum += alumno[key] ? alumno[key].filter(x => x).length : 0;
+    })
+
+    return sum;
+  }
+
+  filtrarAlumnos(lista: Alumno[]) {
+
     this.lAlumnosFiltrados = lista.filter(x => x.nombre.toUpperCase().includes(this.filtroNombre.toUpperCase()));
   }
 }
