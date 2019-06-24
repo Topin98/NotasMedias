@@ -33,19 +33,11 @@ export class NuevosAlumnosPage {
 
       try {
         //desde el principio de la linea hasta el primer numero
-        nombre = linea.substring(0, linea.match(/\d/).index).trim();
+        nombre = linea.substring(0, linea.match(/NP|\d/).index).trim();
       } catch (err) {
-
-        try {
-          //si peta es que tiene como NP
-          //(haciendolo asi si tiene un NP y despues un numero el NP se incluye en el nombre)
-          nombre = linea.substring(0, linea.match(/NP/).index).trim();
-
-        } catch (error) {
-          //si no encuentra ningun numero ni ningun NP
-          this.messagesService.presentAlert("Error", "Los datos copiados no son correctos");
-          return;
-        }
+        //si no encuentra ningun numero ni ningun NP
+        this.messagesService.presentAlert("Error", "Los datos copiados no son correctos");
+        return;
       }
 
       //quitamos el nombre del textarea, un espacio en blanco que hay entre el nombre y el primer numero y dividimos los numeros en un array
@@ -59,7 +51,6 @@ export class NuevosAlumnosPage {
     });
 
     this.alumnosService.insertarAlumnos(lAlumnosInsertar);
-
     this.texto = "";
 
   }
@@ -68,7 +59,9 @@ export class NuevosAlumnosPage {
     this.texto = this.texto
       .replace(/IN|SU|BI|NT|SB|\t|\t /g, "")
       .replace(/\n /g, " ")
-      .replace(/\nNP/g, " NP");
+      .replace(/\nNP/g, " NP")
+      .replace(/EXEN/g, " EXEN")
+
 
     return this.texto.split("\n");
   }

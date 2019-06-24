@@ -19,28 +19,27 @@ export class AlumnosService {
   public filtroNombre: string = "";
   public filtroCurso: string = "";
 
-  constructor(db: AngularFirestore) {
+  constructor(public db: AngularFirestore) {
 
     this.alumnosCollection = db.collection<Alumno>("alumnos");
 
     this.alumnos = this.alumnosCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
+      map(res => {
+        return res.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return { id, ...data };
         });
+      }),
+      map(alumnos => {
+        console.log("alumnos", alumnos);
+
+        this.lAlumnos = alumnos;
+        this.filtrarAlumnos();
+
+        return alumnos;
       })
     );
-
-    this.alumnos.subscribe(alumnos => {
-      console.log("alumnos", alumnos);
-
-      this.lAlumnos = alumnos;
-
-      this.filtrarAlumnos(alumnos);
-    })
-
   }
 
   getAlumnos() {
@@ -48,15 +47,15 @@ export class AlumnosService {
   }
 
   insertarAlumnos(lAlumnos: Alumno[]) {
-    lAlumnos.forEach(alumno => this.insertarAlumno(alumno));
+    let batch = this.db.firestore.batch();
+    lAlumnos.forEach(alumno => {
+      batch.set(this.alumnosCollection.doc(this.db.createId()).ref, alumno);
+    });
+    batch.commit();
   }
 
-  insertarAlumno(alumno: Alumno) {
-    if (alumno.id) {
-      this.alumnosCollection.doc(alumno.id).set(alumno);
-    } else {
-      this.alumnosCollection.add(alumno);
-    }
+  actualizarAlumno(alumno: Alumno) {
+    this.alumnosCollection.doc(alumno.id).set(alumno);
   }
 
   eliminarAlumno(alumno: Alumno) {
@@ -66,7 +65,7 @@ export class AlumnosService {
   getSuma(alumno: Alumno) {
     let sum = 0;
     this.lNombresListas.forEach(key => {
-      sum += alumno[key] ? alumno[key].reduce((sumar, a) => sumar + Number(a), 0) : 0;
+      sum += alumno[key] ? alumno[key].filter(x => !isNaN(x)).reduce((sumar, a) => sumar + Number(a), 0) : 0;
     });
 
     return sum;
@@ -92,8 +91,7 @@ export class AlumnosService {
     return sum;
   }
 
-  filtrarAlumnos(lista: Alumno[]) {
-
-    this.lAlumnosFiltrados = lista.filter(x => x.nombre.toUpperCase().includes(this.filtroNombre.toUpperCase()));
+  filtrarAlumnos() {
+    this.lAlumnosFiltrados = this.lAlumnos.filter(x => x.nombre.toUpperCase().includes(this.filtroNombre.toUpperCase()));
   }
 }

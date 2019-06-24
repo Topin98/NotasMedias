@@ -25,29 +25,29 @@ export class AsignaturasService {
     this.asignaturasCollection = db.collection<Asignatura>("asignaturas");
 
     this.asignaturas = this.asignaturasCollection.snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
+      map(res => {
+        return res.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
           return { id, ...data };
         });
+      }),
+      map(asignaturas => {
+        console.log("asignaturas", asignaturas);
+
+        this.lAsignaturas = asignaturas;
+
+        this.lPrimero = this.filtrarAsignaturas(1);
+        this.lSegundo = this.filtrarAsignaturas(2);
+        this.lTercero = this.filtrarAsignaturas(3);
+        this.lCuarto = this.filtrarAsignaturas(4);
+
+        this.lLAsignaturas = [];
+        this.lLAsignaturas.push(this.lPrimero, this.lSegundo, this.lTercero, this.lCuarto);
+
+        return asignaturas;
       })
     );
-
-    this.asignaturas.subscribe(asignaturas => {
-      console.log("asignaturas", asignaturas);
-
-      this.lAsignaturas = asignaturas;
-
-      this.lPrimero = this.filtrarAsignaturas(1);
-      this.lSegundo = this.filtrarAsignaturas(2);
-      this.lTercero = this.filtrarAsignaturas(3);
-      this.lCuarto = this.filtrarAsignaturas(4);
-
-      this.lLAsignaturas = [];
-      this.lLAsignaturas.push(this.lPrimero, this.lSegundo, this.lTercero, this.lCuarto);
-    });
-
   }
 
   getAsignaturas() {

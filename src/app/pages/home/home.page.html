@@ -14,7 +14,7 @@
 <ion-content>
 
   <div class="filtros">
-    <input [(ngModel)]="alumnosService.filtroNombre" (keyup)="alumnosService.filtrarAlumnos(alumnosService.lAlumnos)"
+    <input [(ngModel)]="alumnosService.filtroNombre" (keyup)="alumnosService.filtrarAlumnos()"
       placeholder="Filtrar por nombre..." type="text" />
     <ion-list lines="none">
       <ion-radio-group [(ngModel)]="alumnosService.filtroCurso" name="curso">

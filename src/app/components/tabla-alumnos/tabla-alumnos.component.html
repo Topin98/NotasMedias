@@ -10,17 +10,16 @@
     <tr *ngFor="let alumno of alumnosService.lAlumnosFiltrados">
       <ng-container *ngIf="alumno[lista]">
         <td>
-          <input ([ngModel])="alumno.nombre" [value]="alumno.nombre"
-            (keyup.enter)="actualizarNombre($event.target.value, alumno)" required />
+          <input ([ngModel])="alumno.nombre" [value]="alumno.nombre" (keyup.enter)="actualizarNombre($event.target.value, alumno)" />
         </td>
         <td *ngFor="let nota of alumno[lista]; let i = index">
           <input ([ngModel])="nota" [value]="nota" (keyup.enter)="actualizarNota($event.target.value, i, alumno)" />
         </td>
         <td class="calculos">
-          {{ getSuma(alumno) | number }}
+          {{ alumnosService.getSuma(alumno) | number }}
         </td>
         <td class="calculos">
-          {{ getMedia(alumno) | number:'1.2-2' }}
+          {{ alumnosService.getMedia(alumno) | number:'1.2-2' }}
         </td>
       </ng-container>
     </tr>

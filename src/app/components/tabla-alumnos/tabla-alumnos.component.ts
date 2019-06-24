@@ -24,7 +24,7 @@ export class TablaAlumnosComponent {
   actualizarNombre(nuevoNombre: string, alumno: Alumno) {
     if (nuevoNombre){
       alumno.nombre = nuevoNombre;
-      this.alumnosService.insertarAlumno(alumno);
+      this.alumnosService.actualizarAlumno(alumno);
 
     } else {
       this.messages.presentAlertConfirm("Eliminar alumno", "Estás seguro que quieres eliminar el alumno?", () => {
@@ -35,15 +35,7 @@ export class TablaAlumnosComponent {
 
   actualizarNota(nuevaNota: string, index: number, alumno: Alumno) {
     alumno[this.lista][index] = nuevaNota;
-    this.alumnosService.insertarAlumno(alumno);
-  }
-
-  getSuma(alumno: Alumno){
-    return this.alumnosService.getSuma(alumno);
-  }
-
-  getMedia(alumno: Alumno){
-    return this.alumnosService.getMedia(alumno);
+    this.alumnosService.actualizarAlumno(alumno);
   }
 
 }
