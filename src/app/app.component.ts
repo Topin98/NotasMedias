@@ -31,7 +31,7 @@ export class AppComponent {
       this.splashScreen.hide();
 
       this.authService.getState().subscribe(user => {
-        console.log("user?", user);
+        //console.log("user?", user);
 
         if (user){
           this.navCtrl.navigateRoot("/");

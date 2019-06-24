@@ -16,10 +16,10 @@
           <input ([ngModel])="nota" [value]="nota" (keyup.enter)="actualizarNota($event.target.value, i, alumno)" />
         </td>
         <td class="calculos">
-          {{ alumnosService.getSuma(alumno) | number }}
+          {{ alumnosService.getSuma(alumno) }}
         </td>
         <td class="calculos">
-          {{ alumnosService.getMedia(alumno) | number:'1.2-2' }}
+          {{ alumnosService.getMedia(alumno) }}
         </td>
       </ng-container>
     </tr>

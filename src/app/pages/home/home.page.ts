@@ -58,9 +58,9 @@ export class HomePage implements OnInit {
     var ws_data = this.getDataExcel();
     var ws = XLSX.utils.aoa_to_sheet(ws_data);
     wb.Sheets["sheet"] = ws;
-    var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+    var wbout = XLSX.write(wb, { bookType: "xlsx", type: "binary" });
 
-    saveAs(new Blob([this.s2ab(wbout)], { type: "application/octet-stream" }), 'test.xlsx');
+    saveAs(new Blob([this.s2ab(wbout)], { type: "application/octet-stream" }), "NotasMediasESO.xlsx");
   }
 
   getDataExcel() {
@@ -92,14 +92,14 @@ export class HomePage implements OnInit {
       fila = [];
     });
 
-    console.log("resultado", resultado);
+    //console.log("resultado", resultado);
 
     return resultado;
   }
 
   generarCabecera(): string[] {
 
-    let fila = [null];
+    let fila = ["Nombre"];
     this.asignaturasService.lLAsignaturas.forEach(lAsignaturas => {
       lAsignaturas.forEach(asignatura => {
         fila.push(asignatura.nombre);

@@ -32,7 +32,7 @@ export class AlumnosService {
         });
       }),
       map(alumnos => {
-        console.log("alumnos", alumnos);
+        //console.log("alumnos", alumnos);
 
         this.lAlumnos = alumnos;
         this.filtrarAlumnos();
@@ -49,7 +49,11 @@ export class AlumnosService {
   insertarAlumnos(lAlumnos: Alumno[]) {
     let batch = this.db.firestore.batch();
     lAlumnos.forEach(alumno => {
-      batch.set(this.alumnosCollection.doc(this.db.createId()).ref, alumno);
+      if (alumno.id){
+        batch.update(this.alumnosCollection.doc(alumno.id).ref, alumno);
+      } else {
+        batch.set(this.alumnosCollection.doc(this.db.createId()).ref, alumno);
+      }
     });
     batch.commit();
   }
@@ -76,7 +80,7 @@ export class AlumnosService {
     let suma = this.getSuma(alumno);
 
     if (suma) {
-      return suma / this.getNumNotas(alumno);
+      return Math.round((suma / this.getNumNotas(alumno)) * 100) / 100;
     } else {
       return null;
     }
@@ -92,6 +96,6 @@ export class AlumnosService {
   }
 
   filtrarAlumnos() {
-    this.lAlumnosFiltrados = this.lAlumnos.filter(x => x.nombre.toUpperCase().includes(this.filtroNombre.toUpperCase()));
+    this.lAlumnosFiltrados = this.lAlumnos.filter(x => x.nombre.toUpperCase().includes(this.filtroNombre.toUpperCase())).sort((a1, a2) => a1.nombre < a2.nombre ? -1 : 1);
   }
 }

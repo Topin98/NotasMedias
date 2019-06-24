@@ -24,19 +24,22 @@ export class NuevosAlumnosPage {
   traducir() {
 
     let lAlumnosInsertar: Alumno[] = [];
-
     let resultados = this.limpiarTexto();
+    let aviso = false;
 
     resultados.forEach(linea => {
 
       let nombre;
-
       try {
-        //desde el principio de la linea hasta el primer numero
+        //desde el principio de la linea hasta el primer numero o primer NP
         nombre = linea.substring(0, linea.match(/NP|\d/).index).trim();
       } catch (err) {
         //si no encuentra ningun numero ni ningun NP
-        this.messagesService.presentAlert("Error", "Los datos copiados no son correctos");
+        //si solo tiene NP entraria por aqui tambien
+        if (!aviso) {
+          this.messagesService.presentAlert("Error", "Los datos copiados no son correctos o se copió un alumno que no se presentó a ninguna asignatura");
+          aviso = true;
+        }
         return;
       }
 
@@ -52,7 +55,6 @@ export class NuevosAlumnosPage {
 
     this.alumnosService.insertarAlumnos(lAlumnosInsertar);
     this.texto = "";
-
   }
 
   limpiarTexto(): string[] {
@@ -61,7 +63,6 @@ export class NuevosAlumnosPage {
       .replace(/\n /g, " ")
       .replace(/\nNP/g, " NP")
       .replace(/EXEN/g, " EXEN")
-
 
     return this.texto.split("\n");
   }

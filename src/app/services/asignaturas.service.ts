@@ -33,7 +33,7 @@ export class AsignaturasService {
         });
       }),
       map(asignaturas => {
-        console.log("asignaturas", asignaturas);
+        //console.log("asignaturas", asignaturas);
 
         this.lAsignaturas = asignaturas;
 
